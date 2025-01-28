@@ -35,13 +35,11 @@ def encode_categorical_variables(df, categorical_columns):
     print("One-hot encoding applied successfully!")
 
     # Label Encoding
-    label_encoders = {}
+    #label_encoders = {}
     for col in categorical_columns:
-        le = LabelEncoder()
-        df[col + '_label_encoded'] = le.fit_transform(df[col])
-        label_encoders[col] = le
+        df[col + 'encoded'] = df[col].str.extract(r'_(\d+)$').astype(int)
     print("Label encoding applied successfully!")
-    return df, label_encoders
+    return df
 
 # Task 4: Handle Missing Values
 def handle_missing_values(df, strategy='mean', columns=None):
